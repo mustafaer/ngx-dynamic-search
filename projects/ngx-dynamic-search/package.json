@@ -1,6 +1,7 @@
 {
   "name": "ngx-dynamic-search",
-  "version": "16.0.0",
+  "version": "16.0.1",
+  "description": "Angular dynamic search",
   "peerDependencies": {
     "@angular/common": "^16.0.0",
     "@angular/core": "^16.0.0"
@@ -8,5 +9,30 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mustafaer/ngx-dynamic-search.git"
+  },
+  "url": "https://github.com/mustafaer/ngx-dynamic-search/issues",
+  "email": "mustafaerpro@gmail.com",
+  "author": "Mustafa Er",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "angular16",
+    "public",
+    "dynamic",
+    "search"
+  ],
+  "funding": [
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/mustafaer"
+    },
+    {
+      "type": "buymeacoffee",
+      "url": "https://www.buymeacoffee.com/mustafaer"
+    }
+  ]
 }
