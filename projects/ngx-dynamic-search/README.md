@@ -11,7 +11,7 @@ Angular 16
 ## Installation
 
 To install this library, run:
-
+https://www.npmjs.com/package/ngx-dynamic-search
 ```bash
 npm i ngx-dynamic-search
 ```
