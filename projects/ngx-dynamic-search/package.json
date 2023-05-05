@@ -1,6 +1,6 @@
 {
   "name": "ngx-dynamic-search",
-  "version": "16.0.1",
+  "version": "16.0.3",
   "description": "Angular dynamic search",
   "peerDependencies": {
     "@angular/common": "^16.0.0",
