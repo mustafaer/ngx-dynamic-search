@@ -23,7 +23,7 @@ export class DynamicSearchPipe implements PipeTransform {
     /**
      * Check filterable object props
      */
-    function checkInside(item: string | any[], term: string): boolean {
+    function checkInside(item: any, term: string): boolean {
 
       let compareItem = item.toString();
 
