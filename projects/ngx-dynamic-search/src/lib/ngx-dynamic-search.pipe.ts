@@ -71,7 +71,7 @@ export class DynamicSearchPipe implements PipeTransform {
    * @param isCaseSensitive variable for compare type
    * @param excludes array of strings which will ignored during search
    */
-  public transform<T>(items: T[], term: string, isCaseSensitive: boolean = false, excludes: string[] = []): T[] {
+  public transform<T>(items: any, term: string, isCaseSensitive: boolean = false, excludes: string[] = []): any {
     if (!term || !items) return items;
 
     return DynamicSearchPipe.filter(items, term, isCaseSensitive, excludes);
