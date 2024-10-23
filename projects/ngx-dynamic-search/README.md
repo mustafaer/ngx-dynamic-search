@@ -2,12 +2,6 @@
 
 Runtime search for angular applications.
 
-Supported version:
-
-```
-Angular 16
-```
-
 ## Installation
 
 To install this library, run:
