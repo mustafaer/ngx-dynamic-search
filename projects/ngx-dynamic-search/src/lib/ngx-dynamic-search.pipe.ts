@@ -2,7 +2,6 @@ import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'ngxDynamicSearch',
-  standalone: true
 })
 export class DynamicSearchPipe implements PipeTransform {
 
