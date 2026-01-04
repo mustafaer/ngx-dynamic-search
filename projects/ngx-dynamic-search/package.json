@@ -1,7 +1,7 @@
 {
   "name": "ngx-dynamic-search",
   "version": "21.0.0",
-  "description": "Angular dynamic search",
+  "description": "A high-performance, standalone Angular pipe for dynamic, deep search filtering across nested objects and arrays. Supports case sensitivity and property exclusion.",
   "peerDependencies": {
     "@angular/common": "^21.0.0",
     "@angular/core": "^21.0.0"
@@ -14,15 +14,30 @@
     "type": "git",
     "url": "https://github.com/mustafaer/ngx-dynamic-search.git"
   },
-  "url": "https://github.com/mustafaer/ngx-dynamic-search/issues",
-  "email": "mustafaerpro@gmail.com",
-  "author": "Mustafa ER",
+  "bugs": {
+    "url": "https://github.com/mustafaer/ngx-dynamic-search/issues"
+  },
+  "homepage": "https://github.com/mustafaer/ngx-dynamic-search#readme",
+  "author": {
+    "name": "Mustafa ER",
+    "email": "mustafaerpro@gmail.com",
+    "url": "https://github.com/mustafaer"
+  },
   "license": "MIT",
   "keywords": [
     "angular",
-    "public",
-    "dynamic",
-    "search"
+    "angular-search",
+    "search-pipe",
+    "filter-pipe",
+    "dynamic-search",
+    "deep-search",
+    "nested-search",
+    "angular-filter",
+    "ngx",
+    "standalone-pipe",
+    "typescript",
+    "frontend",
+    "utility"
   ],
   "funding": [
     {

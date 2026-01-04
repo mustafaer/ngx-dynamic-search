@@ -1,75 +1,75 @@
 # NGX DYNAMIC SEARCH
 
-Runtime search for Angular applications.
+[![npm version](https://img.shields.io/npm/v/ngx-dynamic-search.svg)](https://www.npmjs.com/package/ngx-dynamic-search)
+[![npm downloads](https://img.shields.io/npm/dm/ngx-dynamic-search.svg)](https://www.npmjs.com/package/ngx-dynamic-search)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Installation
+**ngx-dynamic-search** is a high-performance, lightweight, and standalone Angular pipe designed for dynamic, deep search filtering across complex nested objects and arrays. It seamlessly integrates with modern Angular applications (Angular 14+), providing a robust solution for client-side filtering.
 
-To install this library, run:
-https://www.npmjs.com/package/ngx-dynamic-search
+## 🚀 Features
+
+*   **🔍 Deep Search**: Recursively searches through nested objects and arrays to find matches anywhere in your data structure.
+*   **⚡ High Performance**: Optimized for speed, ensuring smooth filtering even with large datasets.
+*   **🛡️ Type Safe**: Gracefully handles `null`, `undefined`, `Date` objects, and various primitive types without crashing.
+*   **🧩 Standalone**: Built as a standalone pipe, making it easy to import and use in any Angular component without `NgModule` boilerplate.
+*   **⚙️ Customizable**: Supports case-sensitive search and the ability to exclude specific properties from the search scope.
+
+## 📦 Installation
+
+Install the library via npm:
+
 ```bash
-npm i ngx-dynamic-search
+npm install ngx-dynamic-search
 ```
 
-## Usage
+## 🛠 Usage
 
-Import the `DynamicSearchPipe` in your component. Since it is a standalone pipe, you can import it directly into your standalone component's `imports` array.
+### 1. Import the Pipe
+
+Since `ngxDynamicSearch` is a standalone pipe, simply add it to the `imports` array of your standalone component.
 
 ```typescript
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicSearchPipe } from "ngx-dynamic-search";
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
+import { DynamicSearchPipe } from 'ngx-dynamic-search';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, DynamicSearchPipe, FormsModule],
+  imports: [CommonModule, FormsModule, DynamicSearchPipe], // Import here
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   searchValue = '';
-  items: Item[] = [
+  
+  items = [
     {
       company: 'Alfreds Futterkiste',
       contact: 'Maria Anders',
-      country: 'Germany'
+      country: 'Germany',
+      details: { sector: 'Food', employees: 50 }
     },
     {
       company: 'Centro comercial Moctezuma',
       contact: 'Francisco Chang',
-      country: 'Mexico'
+      country: 'Mexico',
+      details: { sector: 'Retail', employees: 120 }
     },
-    {
-      company: 'Ernst Handel',
-      contact: 'Roland Mendel',
-      country: 'Austria'
-    },
-    {
-      company: 'Island Trading',
-      contact: 'Helen Bennett',
-      country: 'UK'
-    },
-    {
-      company: 'Laughing Bacchus Winecellars',
-      contact: 'Yoshi Tannamuri',
-      country: 'Canada'
-    },
+    // ... more items
   ];
-}
-
-export interface Item {
-  company: string;
-  contact: string;
-  country: string;
 }
 ```
 
-Use the pipe in your template:
+### 2. Use in Template
+
+Apply the pipe to your `*ngFor` loop.
 
 ```html
-<div style="width: 100%; height: 100%">
-  <input type="text" [(ngModel)]="searchValue" id="search" name="search" placeholder="Search..">
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchValue" placeholder="Search...">
+  
   <table>
     <tr>
       <th>Company</th>
@@ -77,12 +77,9 @@ Use the pipe in your template:
       <th>Country</th>
     </tr>
     <!-- 
-      Parameters:
-      1. searchValue: The term to search for.
-      2. isCaseSensitive (optional, default: false): Whether the search should be case-sensitive.
-      3. excludes (optional, default: []): Array of property names to exclude from the search.
+      Usage: items | ngxDynamicSearch : searchTerm : isCaseSensitive : excludedKeys
     -->
-    <tr *ngFor="let item of items | ngxDynamicSearch: searchValue : false : ['contact']">
+    <tr *ngFor="let item of items | ngxDynamicSearch: searchValue : false : ['id', 'secretField']">
       <td>{{item.company}}</td>
       <td>{{item.contact}}</td>
       <td>{{item.country}}</td>
@@ -91,22 +88,26 @@ Use the pipe in your template:
 </div>
 ```
 
-## API
+## 📚 API Reference
 
 ### `ngxDynamicSearch` Pipe
 
-Filters an array of items based on a search term.
-
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `items` | `any[]` | - | The array of items to filter. |
-| `term` | `string` | - | The search term to match against properties. |
-| `isCaseSensitive` | `boolean` | `false` | If `true`, performs a case-sensitive search. |
-| `excludes` | `string[]` | `[]` | A list of property keys to ignore during the search. |
+| `items` | `any[]` | - | The array of objects to filter. |
+| `term` | `string` | - | The search string to match against object properties. |
+| `isCaseSensitive` | `boolean` | `false` | (Optional) If `true`, performs a case-sensitive search. |
+| `excludes` | `string[]` | `[]` | (Optional) An array of property keys to ignore during the search. |
 
-## Features
+## 🤝 Contributing
 
-*   **Deep Search**: Recursively searches through nested objects and arrays.
-*   **Type Safe**: Handles `null`, `undefined`, and various data types gracefully.
-*   **Performance**: Optimized for Angular applications.
-*   **Standalone**: Ready for modern Angular standalone components.
+Contributions are welcome! Please feel free to submit a Pull Request or open an issue on [GitHub](https://github.com/mustafaer/ngx-dynamic-search).
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+<div align="center">
+  Made with ❤️ by <a href="https://github.com/mustafaer">Mustafa ER</a>
+</div>
