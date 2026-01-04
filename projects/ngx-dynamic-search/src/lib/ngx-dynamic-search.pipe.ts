@@ -1,78 +1,73 @@
-import {Pipe, PipeTransform} from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'ngxDynamicSearch',
+  standalone: true
 })
 export class DynamicSearchPipe implements PipeTransform {
 
   /**
-   * Filer items[]
+   * Search Filter Pipe
    * @param items List of items to filter
-   * @param term  a string term to compare with every property of the list
-   * @param isCaseSensitive check term compare is case-sensitive
-   * @param excludes List of keys which will be ignored during search
+   * @param term Search term
+   * @param isCaseSensitive Whether the search is case-sensitive
+   * @param excludes List of keys to ignore during search
    */
-  private static filter<T>(items: T[], term: string, isCaseSensitive: boolean = false, excludes: string[] = []): T[] {
-    let toCompare: string = term;
+  public transform<T>(items: T[] | null | undefined, term: string, isCaseSensitive: boolean = false, excludes: string[] = []): T[] {
+    if (!items) return [];
+    if (!term) return items;
 
-    if (!isCaseSensitive) {
-      toCompare = term.toLowerCase();
+    const toCompare = isCaseSensitive ? term : term.toLowerCase();
+
+    return items.filter(item => this.checkInside(item, toCompare, isCaseSensitive, excludes));
+  }
+
+  /**
+   * Recursive check for term in item
+   */
+  private checkInside(item: any, term: string, isCaseSensitive: boolean, excludes: string[]): boolean {
+    if (item === null || item === undefined) {
+      return false;
     }
 
-    /**
-     * Check filterable object props
-     */
-    function checkInside(item: any, term: string): boolean {
+    // Handle primitives (string, number, boolean)
+    if (typeof item !== 'object') {
+      const value = item.toString();
+      const compareValue = isCaseSensitive ? value : value.toLowerCase();
+      return compareValue.includes(term);
+    }
 
-      let compareItem = item.toString();
+    // Handle Date objects
+    if (item instanceof Date) {
+      const value = item.toString();
+      const compareValue = isCaseSensitive ? value : value.toLowerCase();
+      return compareValue.includes(term);
+    }
 
-      if (!isCaseSensitive) {
-        compareItem = item.toString().toLowerCase();
-      }
-
-      if (typeof item === 'string' && compareItem.includes(toCompare)) {
-        return true;
-      }
-
-      for (let property in item) {
-        const datum = item[property];
-
-        if (datum === null || datum == undefined || excludes.includes(property)) {
-          continue;
-        }
-
-        let compareDatum = datum.toString();
-
-        if (!isCaseSensitive) {
-          compareDatum = datum.toString().toLowerCase();
-        }
-
-        if (typeof datum === 'object') {
-          if (checkInside(datum, term)) {
-            return true;
-          }
-        } else if (compareDatum.includes(toCompare)) {
+    // Handle Arrays
+    if (Array.isArray(item)) {
+      for (const element of item) {
+        if (this.checkInside(element, term, isCaseSensitive, excludes)) {
           return true;
         }
       }
       return false;
     }
 
-    return items.filter(function (item: T) {
-      return checkInside(item, term);
-    });
-  }
+    // Handle Objects
+    // Using Object.keys to iterate over own enumerable properties
+    const keys = Object.keys(item);
+    for (const key of keys) {
+      if (excludes.includes(key)) {
+        continue;
+      }
 
-  /**
-   * Search Filter Pipe
-   * @param items object from array
-   * @param term term's search
-   * @param isCaseSensitive variable for compare type
-   * @param excludes array of strings which will ignored during search
-   */
-  public transform<T>(items: any, term: string, isCaseSensitive: boolean = false, excludes: string[] = []): any {
-    if (!term || !items) return items;
+      const value = item[key];
+      if (this.checkInside(value, term, isCaseSensitive, excludes)) {
+        return true;
+      }
+    }
 
-    return DynamicSearchPipe.filter(items, term, isCaseSensitive, excludes);
+    return false;
   }
 }
