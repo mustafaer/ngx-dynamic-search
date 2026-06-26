@@ -1,10 +1,10 @@
 {
   "name": "ngx-dynamic-search",
-  "version": "21.0.0",
+  "version": "22.0.0",
   "description": "A high-performance, standalone Angular pipe for dynamic, deep search filtering across nested objects and arrays. Supports case sensitivity and property exclusion.",
   "peerDependencies": {
-    "@angular/common": "^21.0.0",
-    "@angular/core": "^21.0.0"
+    "@angular/common": "^22.0.0",
+    "@angular/core": "^22.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
